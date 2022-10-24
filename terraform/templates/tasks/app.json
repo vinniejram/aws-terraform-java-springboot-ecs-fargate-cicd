@@ -1,0 +1,27 @@
+[
+  {
+    "image": "${var.account}.dkr.ecr.us-east-1.amazonaws.com/cargarage_repo:latest",
+    "memory": 256,
+    "name": "cargarage-ecs",
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "environment": [
+      {
+        "name": "SPRING_REDIS_HOST",
+        "value": "${redis_host}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hello-ecs/app",
+        "awslogs-region": "us-west-2",
+        "awslogs-stream-prefix": "hello-ecs"
+      }
+    }
+  }
+]
