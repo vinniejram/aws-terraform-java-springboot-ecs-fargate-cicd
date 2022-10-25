@@ -18,9 +18,9 @@
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "/hello-ecs/app",
-        "awslogs-region": "us-west-2",
-        "awslogs-stream-prefix": "hello-ecs"
+        "awslogs-group": "/cargarage-ecs/app",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "cargarage-ecs"
       }
     }
   }

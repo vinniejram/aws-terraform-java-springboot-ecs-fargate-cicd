@@ -1,8 +1,8 @@
-resource "aws_ecs_cluster" "default" {
+resource "aws_ecs_cluster" "cargarage-ecs-cluster" {
   name = var.name
 }
 
-resource "aws_ecs_task_definition" "default" {
+resource "aws_ecs_task_definition" "cargarage-ecs-td" {
   family                = var.name
   container_definitions = templatefile("${path.module}/templates/tasks/app.json", { redis_host = aws_elasticache_cluster.default.cache_nodes[0].address })
 
@@ -13,10 +13,10 @@ resource "aws_ecs_task_definition" "default" {
   execution_role_arn       = aws_iam_role.ecs_task_execution.arn
 }
 
-resource "aws_ecs_service" "default" {
+resource "aws_ecs_service" "cargarage-ecs-service" {
   name            = var.name
-  cluster         = aws_ecs_cluster.default.name
-  task_definition = aws_ecs_task_definition.default.arn
+  cluster         = aws_ecs_cluster.cargarage-ecs-cluster.name
+  task_definition = aws_ecs_task_definition.cargarage-ecs-td.arn
   desired_count   = 1
   launch_type     = "FARGATE"
 
