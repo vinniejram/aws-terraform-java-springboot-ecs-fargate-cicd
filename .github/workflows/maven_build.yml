@@ -8,6 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      SHA7: ${GITHUB_SHA::7}
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -17,6 +20,9 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn clean install
+
+      - name: "Print short sha"
+        run: echo "Short SHA is ${{ env.SHA7 }}"
 
       - name: Publish to Docker Hub
         uses: docker/build-push-action@v1
