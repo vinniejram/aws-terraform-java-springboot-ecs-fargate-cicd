@@ -30,7 +30,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           repository: vinodjothiram/cargarage
-          tags: ${{ github.sha }}
+          tags: latest
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
