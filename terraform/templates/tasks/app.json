@@ -1,6 +1,6 @@
 [
   {
-    "image": "${var.account}.dkr.ecr.us-east-1.amazonaws.com/cargarage_repo:latest",
+    "image": "582081555866.dkr.ecr.us-east-1.amazonaws.com/cargarage_repo:latest",
     "memory": 256,
     "name": "cargarage-ecs",
     "portMappings": [
