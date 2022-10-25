@@ -23,7 +23,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: dockerHubUser/dockerHubRepository
+          repository: vinodjothiram/cargarage
           tags: ${{github.run_number}}
 
       - name: Configure AWS credentials
