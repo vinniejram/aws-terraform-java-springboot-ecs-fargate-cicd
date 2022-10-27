@@ -1,13 +1,9 @@
 
-name: Deploy application with Terraform
+name: Deploy/Destroy application with Terraform
 
 on:
   release:
-    tags:
-      - dev*
-      - qa*
-      - uat*
-      - prod*
+    types: [published]
 
 jobs:
   deploy_terraform:
@@ -45,3 +41,6 @@ jobs:
 
       #- name: "Run terraform apply"
       #  run: terraform -chdir=terraform/ apply -auto-approve
+
+      #- name: "destroy terraform"
+      #  run: terraform -chdir=terraform/ destroy
