@@ -46,7 +46,7 @@ resource "aws_api_gateway_integration" "cargarageGatewayIntegration" {
   uri                     = "http://${aws_alb.default.dns_name}/api/cars/{id}"
   connection_type         = "VPC_LINK"
   connection_id           = aws_api_gateway_vpc_link.cargarage_api_vpc_link.id
-  timeout_milliseconds    = 60000
+  timeout_milliseconds    = 29000
 
   cache_key_parameters = ["method.request.path.proxy"]
   request_parameters = {
