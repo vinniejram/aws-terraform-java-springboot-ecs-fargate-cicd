@@ -9,12 +9,7 @@ variable "aws_region" {
 
 variable "az_count" {
   description = "Number of AZs to cover in a given AWS region"
-  default     = "2"
-}
-
-
-variable "admin_cidr_ingress" {
-  description = "CIDR to allow tcp/22 ingress to EC2 instance"
+  default     = "1"
 }
 
 variable "redis_cluster_count" {
