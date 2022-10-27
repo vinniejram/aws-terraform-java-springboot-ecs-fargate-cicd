@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "cargarage-ecs-cluster" {
 
 resource "aws_ecs_task_definition" "cargarage-ecs-td" {
   family                = var.name
-  container_definitions = templatefile("${path.module}/templates/tasks/app.json", { redis_host = aws_elasticache_cluster.default.cache_nodes[0].address })
+  container_definitions = templatefile("${path.module}/templates/tasks/app.json", { redis_host = aws_elasticache_cluster.cargarage-elasticache-cluster.cache_nodes[0].address })
 
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"

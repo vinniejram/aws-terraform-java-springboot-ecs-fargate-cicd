@@ -42,14 +42,14 @@ resource "aws_iam_role_policy" "scheduled_task_cw_event_role_cloudwatch_policy" 
 resource "aws_cloudwatch_event_rule" "cargarage_cron_event_rule" {
   name                = "CargarageCronEventTest"
   description         = "Cargarage Cron Event Test"
-  schedule_expression = "cron(0 0 * * ? *)"
+  schedule_expression = "cron(0 10 * * 5)" #At 10:00 AM, only on Friday
 }
 
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT TARGET
 #------------------------------------------------------------------------------
-resource "aws_cloudwatch_event_target" "example" {
-  arn  = "${aws_api_gateway_stage.example.execution_arn}/GET"
+resource "aws_cloudwatch_event_target" "cargarage_cron_event_target" {
+  arn  = "${aws_api_gateway_stage.cargarageAPIGatewayStage.execution_arn}/GET"
   rule = aws_cloudwatch_event_rule.cargarage_cron_event_rule.id
 
   http_target {
@@ -57,7 +57,7 @@ resource "aws_cloudwatch_event_target" "example" {
       Body = "$.detail.body"
     }
     header_parameters = {
-      Env = "Test"
+      Env = "Dev"
     }
   }
 }
