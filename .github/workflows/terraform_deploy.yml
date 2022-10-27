@@ -26,12 +26,18 @@ jobs:
 
       - name: "intialize terraform"
         run: terraform -chdir=terraform/ init
+        env:
+          TF_LOG: DEBUG
 
       - name: "validate terraform"
         run: terraform -chdir=terraform/ validate
+        env:
+          TF_LOG: DEBUG
 
       - name: "plan terraform"
         run: terraform -chdir=terraform/ plan
+        env:
+          TF_LOG: DEBUG
 
       #- name: "Run terraform apply"
       #  run: terraform -chdir=terraform/ apply -auto-approve
