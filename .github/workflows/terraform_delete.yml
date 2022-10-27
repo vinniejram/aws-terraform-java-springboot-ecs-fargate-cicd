@@ -2,7 +2,8 @@
 name: Destroy application with Terraform
 
 on:
-  push:
+  release:
+    types: [ published ]
     tags:
       - destroy*
       - delete*

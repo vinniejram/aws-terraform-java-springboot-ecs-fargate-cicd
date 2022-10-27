@@ -4,6 +4,11 @@ name: Deploy application with Terraform
 on:
   release:
     types: [published]
+    tags:
+      - dev*
+      - qa*
+      - uat*
+      - prod*
 
 jobs:
   deploy_terraform:
