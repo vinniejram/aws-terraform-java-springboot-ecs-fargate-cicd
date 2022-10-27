@@ -3,7 +3,6 @@ name: Destroy application with Terraform
 
 on:
   release:
-    types: [ published ]
     tags:
       - destroy*
       - delete*
