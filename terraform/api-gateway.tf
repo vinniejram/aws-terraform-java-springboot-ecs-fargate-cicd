@@ -73,7 +73,7 @@ resource "aws_api_gateway_integration_response" "cargarageGatewayIntegrationResp
 }
 
 resource "aws_api_gateway_deployment" "cargarageAPIGatewayDeployment" {
-  depends_on  = ["aws_api_gateway_integration.cargarageGatewayIntegration"]
+  depends_on  = [aws_api_gateway_integration.cargarageGatewayIntegration]
   rest_api_id = aws_api_gateway_rest_api.cargarage.id
   stage_name  = "dev"
 }

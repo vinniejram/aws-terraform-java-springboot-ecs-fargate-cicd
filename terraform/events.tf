@@ -45,12 +45,44 @@ resource "aws_cloudwatch_event_rule" "cargarage_cron_event_rule" {
   schedule_expression = "cron(0 10 * * 5)" #At 10:00 AM, only on Friday
 }
 
+resource "aws_cloudwatch_event_rule" "cargarage_s3_upload_event_rule" {
+  name        = "CargarageS3UploadEventTest"
+  description = "Capture S3 events on upload to bucket"
+  event_pattern = <<PATTERN
+                  {
+                    "source": ["aws.s3"],
+                    "detail-type": ["S3 upload API Call"],
+                    "detail": {
+                      "eventSource": ["s3.amazonaws.com"],
+                      "eventName": ["PutObject","CompleteMultipartUpload"],
+                      "requestParameters": {
+                        "bucketName": ["aws-terraform-java-springboot-eventbridge-bucket"]
+                      }
+                    }
+                  }
+                  PATTERN
+}
+
 #------------------------------------------------------------------------------
 # CLOUDWATCH EVENT TARGET
 #------------------------------------------------------------------------------
 resource "aws_cloudwatch_event_target" "cargarage_cron_event_target" {
   arn  = "${aws_api_gateway_stage.cargarageAPIGatewayStage.execution_arn}/GET"
   rule = aws_cloudwatch_event_rule.cargarage_cron_event_rule.id
+
+  http_target {
+    query_string_parameters = {
+      Body = "$.detail.body"
+    }
+    header_parameters = {
+      Env = "Dev"
+    }
+  }
+}
+
+resource "aws_cloudwatch_event_target" "cargarage_s3_upload_event_target" {
+  arn  = "${aws_api_gateway_stage.cargarageAPIGatewayStage.execution_arn}/GET"
+  rule = aws_cloudwatch_event_rule.cargarage_s3_upload_event_rule.id
 
   http_target {
     query_string_parameters = {
