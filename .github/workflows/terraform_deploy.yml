@@ -34,13 +34,15 @@ jobs:
         env:
           TF_LOG: DEBUG
 
-      - name: "plan terraform"
-        run: terraform -chdir=terraform/ plan
+      #- name: "plan terraform"
+      #  run: terraform -chdir=terraform/ plan
+      #  env:
+      #    TF_LOG: DEBUG
+
+      - name: "Run terraform apply"
+        run: terraform -chdir=terraform/ apply -auto-approve
         env:
           TF_LOG: DEBUG
-
-      #- name: "Run terraform apply"
-      #  run: terraform -chdir=terraform/ apply -auto-approve
 
       #- name: "destroy terraform"
       #  run: terraform -chdir=terraform/ destroy
