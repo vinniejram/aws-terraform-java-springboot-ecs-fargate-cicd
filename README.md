@@ -11,3 +11,5 @@ and github_actions/terraform/aws_ecs_fargate/aws_eventbridge
 # CD Build Diagram:
 
 ![CD Diagram](images/deployment_diagram.jpg)
+
+test ci/cd
