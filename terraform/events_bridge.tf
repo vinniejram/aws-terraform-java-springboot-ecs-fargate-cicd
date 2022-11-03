@@ -93,3 +93,70 @@ resource "aws_cloudwatch_event_target" "cargarage_s3_upload_event_target" {
     }
   }
 }
+
+/*
+resource "aws_cloudwatch_event_bus" "order" {
+  name = "orders"
+}
+
+resource "aws_cloudwatch_event_archive" "order" {
+  name             = "order-archive"
+  description      = "Archived events from order service"
+  event_source_arn = aws_cloudwatch_event_bus.order.arn
+  retention_days   = 7
+  event_pattern    = <<PATTERN
+{
+  "source": ["company.team.order"]
+}
+PATTERN
+}
+
+resource "aws_cloudwatch_event_connection" "test" {
+  name               = "ngrok-connection"
+  description        = "A connection description"
+  authorization_type = "OAUTH_CLIENT_CREDENTIALS"
+
+  auth_parameters {
+    oauth {
+      authorization_endpoint = "https://auth.url.com/endpoint"
+      http_method            = "GET"
+
+      client_parameters {
+        client_id     = "1234567890"
+        client_secret = "Pass1234!"
+      }
+
+      oauth_http_parameters {
+        body {
+          key             = "body-parameter-key"
+          value           = "body-parameter-value"
+          is_value_secret = false
+        }
+
+        header {
+          key             = "header-parameter-key"
+          value           = "header-parameter-value"
+          is_value_secret = false
+        }
+
+        query_string {
+          key             = "query-string-parameter-key"
+          value           = "query-string-parameter-value"
+          is_value_secret = false
+        }
+      }
+    }
+  }
+}
+
+
+resource "aws_cloudwatch_event_api_destination" "test" {
+  name                             = "api-destination"
+  description                      = "An API Destination"
+  invocation_endpoint              = "https://api.destination.com/endpoint"
+  http_method                      = "POST"
+  invocation_rate_limit_per_second = 20
+  connection_arn                   = aws_cloudwatch_event_connection.test.arn
+}
+
+*/
